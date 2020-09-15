@@ -5,8 +5,17 @@
     
     cnpm install -g appium --no-cache
     
+4、查看npm 代理
+
+    npm config list
+  
+5、修改npm下载镜像
+
+    npm config set registry 'http://registry.npm.taobao.org/'
+    
 4、命令行方式安装 appium
- 
+    
+    
     npm install appium@1.8 -g  // 指定版本
 
     npm install appium -g  // 安装最新的版本
