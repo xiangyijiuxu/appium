@@ -1,0 +1,12 @@
+1、安装node
+2、安装python
+3、安装cnpm
+    cmd:  npm install -g cnpm --registry=https://registry.npm.taobao.org
+    
+4、命令行方式安装 appium
+ 
+    npm install appium@1.8 -g  // 指定版本
+
+    npm install appium -g  // 安装最新的版本
+
+    appium -v  // 查看版本
