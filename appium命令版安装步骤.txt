@@ -10,3 +10,7 @@
     npm install appium -g  // 安装最新的版本
 
     appium -v  // 查看版本
+
+5、命令行方式卸载 appium
+    
+    npm uninstall -g appium
