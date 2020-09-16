@@ -13,15 +13,18 @@
 
     npm config set registry 'http://registry.npm.taobao.org/'
     
-4、命令行方式安装 appium
+6、命令行方式安装 appium
     
     
-    npm install appium@1.8 -g  // 指定版本
+    npm install appium@1.8 -g  // 指定版本   appium1.8 不适用Android10及以上版本，需切换appium1.15.1+
 
     npm install appium -g  // 安装最新的版本
 
     appium -v  // 查看版本
 
-5、命令行方式卸载 appium
+7、命令行方式卸载 appium
     
     npm uninstall -g appium
+    
+8、从低版本升级到高版本是需要注意可能需要升级 appiumlibrary 库
+    pip install robotframework-appiumlibrary
