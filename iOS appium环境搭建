@@ -1,0 +1,115 @@
+## Appium官网笔记
+
+http://appium.io/docs/en/about-appium/getting-started/?lang=zh#getting-started
+
+
+
+## Appium搭建视频笔记一
+
+视频链接：https://b23.tv/b4RMzf
+
+以下为视频对应文字笔记
+
+环境：10.14.6
+
+先从App Store安装Xcode
+
+创建demo项目：Crate A New Xcode Project -> Tabbed App(iOS) -> 语言选object C
+
+preference-> Accounts中填入Apple ID, 创建Team, 用该team sign后，即可在模拟器上运行。
+
+连上手机，打开iTunes,插上手机，查看手机信息。
+
+打开QuickTimePlayer -> 新建影片录制 -> 摄像头中选iPhone -> 即可看到屏幕投影？
+
+项目中Dest改用手机，即可在手机上安装成功？
+
+进homebrew官网，用官网命令安装homebrew
+
+brew help
+
+brew install nvm
+
+mkdir ~/.nvm
+
+vi ~/.bash_profile 配置NVM 然后source ~/.bash_profile
+
+nvm ls-remote                #查看可以安装的node版本
+
+nvm install 10.16.3        #安装指定的LTS node版本
+
+node -v
+
+npm -v
+
+进入appium官网
+
+npm install -g appium-doctor
+
+appium-doctor
+
+如果发现提示xcode 未安装 -> sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+sudo appium-doctor --ios
+
+再试提示Carthage未安装 -> brew install Carthage
+
+下载Appium-1.13.0-mac.zip，然后解压到应用程序
+
+启动appium后，Automatic Server -> Desired Capabilities中，填入
+
+```json
+{
+    "platformName": "iOS",
+    "platformVersion": "11.0",
+    "deviceName": "iPhone 7"
+    "automationName": "XCUITest",
+    "udid": "20字节的16进制串",   //用iTunes连上手机即可查看,idevice_id -l亦可
+    "bundleId": "",              //用ios-deploy --list_bundle_id可列出
+    "xcodeOrgId": "",            //在钥匙串-iPhone Developer-组织单位中
+    "xcodeSigningId": "iPhone Developer",
+    "updatedWDABundleId": "",    //自定义的BundleId名，实测无效，改用直接修改xcode的方法
+}
+```
+
+brew install libimobiledevice --HEAD 
+
+发现安装失败，输出里有
+
+Requested 'libusbmuxd >= 1.1.0' but version of libusbmuxd is 1.0.10
+
+搜索google按教程运行命令解决
+
+然后用idevice_id -l即可查看连接上的设备的udid
+
+brew install ios-deploy
+
+然后用ios-deploy --list_bundle_id即可查看已安装的app的bundeId
+
+--------------------------
+
+启动appium后出错处理：
+
+切换到目录：
+
+- Desktop版本：/Appplications/Appium.app/Contents/Resources/app/node_modules/appium/node_modules/appium-webdriveragent
+- Command版本：/usr/local/lib/node_modules/appium/node_modules/appium-webdriveragent
+
+用xcode打开WebDriverAgent.xcodeproj
+
+将WebDriverAgentLib和WebDriverAgentRunner的Product Bundle Identifier改成自己的，
+
+mkdir -p Resources/WebDriverAgent.bundle
+
+./Scripts/bootstrap.sh -d
+
+xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination 'id=<udid>' test
+
+测试如果成功，将在手机上安装一个app。将其缷载重启手机，再启动appium。
+
+启动测试时，在手机端进入设置-通用，等待出现设备管理，赶紧进去选择信任。如果失败可多试几次，直到终端出现
+
+ServerURLHere->http:10.10.11.61:8100<-ServerURLHere
+
+Desktop版本成功后将显示inspector，可查看图片、UI树并进行操作。
+
