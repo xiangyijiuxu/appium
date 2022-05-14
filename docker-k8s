@@ -1,0 +1,25 @@
+登录docker :
+docker login xxx.xxxx.com
+
+docker build -t tag -f Dockerfile .
+
+docker tag tag xxx.xxxx.com/tag
+
+docker pull tag
+
+docker push xxx.xxxx.com/tag
+
+k8s:
+
+kubectl get pods -n namespace
+
+kubectl get nodes -n namespace 
+
+kubectl describe pod pod-name -n namespace
+
+kubectl describe node node-name -n namespace
+
+kubectl logs pod-name -n namespace
+
+
+
