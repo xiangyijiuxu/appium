@@ -14,12 +14,12 @@ k8s:
 kubectl get pods -n namespace
 
 kubectl get nodes -n namespace 
-
+#查看pod详细描述
 kubectl describe pod pod-name -n namespace
-
+#查看node详细描述
 kubectl describe node node-name -n namespace
-
+#查看pod容器日志
 kubectl logs pod-name -n namespace
 
-
-
+#进入pod容器
+kubectl exec -it pod-name -n namespace /bin/sh
